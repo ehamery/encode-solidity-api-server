@@ -153,14 +153,14 @@ export class AppService {
       return false;
     }
 
-    if (ethers.isAddress(recipientAddress)) {
+    if (!ethers.isAddress(recipientAddress)) {
       console.error(`'${recipientAddress}' is not a valid address`);
       return false;
     }
 
     let success = false;
     try {
-      const tokensBigInt = ethers.formatEther(amount);
+      const tokensBigInt = ethers.parseUnits(amount);
 
       console.log(`minting ${amount} MTKV to account '${recipientAddress}'...`);
       // eslint-disable-next-line prettier/prettier
